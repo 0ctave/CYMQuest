@@ -1,0 +1,45 @@
+name: CYMQuest
+main: fr.craftyourmind.quest.Plugin
+version: 1.0
+api-version: 1.15
+depend: [CYMManager]
+commands:
+  quest:
+    aliases: cymquest
+    description: CYMcraft Quest
+    usage: /<command> help
+  skill:
+    aliases: cymskill
+    description: CYM Skill
+    usage: /<command> help
+  skilledit:
+    aliases: cymskilledit
+    description: CYM Skill
+    usage: /<command> - You need permission.
+  classedit:
+    aliases: cymclassedit
+    description: CYM Skill
+    usage: /<command> - You need permission.
+permissions:
+    cymquest.quest:
+        default: true
+    cymquest.questedit:
+        default: op
+    cymquest.load:
+        default: op
+    cymquest.add:
+        default: op
+    cymquest.move:
+        default: op
+    cymquest.remove:
+        default: op
+    cymquest.mechanism:
+        default: op
+    cymquest.reputation:
+        default: op
+    cymquest.event:
+        default: op
+    cymquest.skill:
+        default: true
+    cymquest.skilledit:
+        default: op
