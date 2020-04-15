@@ -81,7 +81,7 @@ public class ObjectiveKill extends AbsObjective{
 			if(victim == null) return type == SURVIVE;
 			
 			if(type == ENTITY){
-				if(targetType){ if(!targetT.isEmpty() && victim.getType() == EntityType.valueOf(targetT)) kill = true;
+				if(targetType){ if(!targetT.isEmpty() && victim.getType() == EntityType.valueOf(targetT.split(":")[1].toUpperCase())) kill = true;
 				}else if(victim.getCustomName() != null && victim.getCustomName().equalsIgnoreCase(targetName)) kill = true;
 				
 			}else if(type == PLAYER){
@@ -121,7 +121,7 @@ public class ObjectiveKill extends AbsObjective{
 		public void tick(int nb) {
 			super.tick(nb);
 			current += nb;
-			String nameNotice = (targetType) ? targetT : targetName;
+			String nameNotice = (targetType) ? targetT.split(":")[1].toUpperCase() : targetName;
 			if(type == SURVIVE) nameNotice = "";
 			sqp.qp.sendMessage(new StringBuilder().append(ChatColor.GRAY).append("+++ ").append("KILL").append(" ")
 					.append(nameNotice).append(" : ").append(current).append("/").append(num).append(" +++").toString());

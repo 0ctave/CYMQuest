@@ -7,6 +7,8 @@ import fr.craftyourmind.manager.CYMChecker.ICheckerInventory;
 import fr.craftyourmind.manager.checker.Inventory;
 import fr.craftyourmind.quest.Quest.StateQuestPlayer;
 
+import java.util.logging.Logger;
+
 public class ObjectiveGather extends AbsObjective{
 	
 	public int amount = 0;
@@ -30,7 +32,11 @@ public class ObjectiveGather extends AbsObjective{
 	}
 	@Override
 	public String getParamsGUI() {
-		Material mat = Material.getMaterial(idMat);
+		Material mat;
+		if(idMat.split(":").length > 1)
+			mat = Material.getMaterial(idMat.split(":")[1].toUpperCase());
+		else
+			mat = Material.getMaterial(idMat);
 		if(mat == null) return ""; else return mat.getKey().toString();
 	}
 	@Override
@@ -54,7 +60,11 @@ public class ObjectiveGather extends AbsObjective{
 			displayName = params[4];
 			pickup = Boolean.valueOf(params[5]);
 		}
-		mat = Material.getMaterial(idMat);
+		if(idMat.split(":").length > 1)
+			mat = Material.getMaterial(idMat.split(":")[1].toUpperCase());
+		else
+			mat = Material.getMaterial(idMat);
+
 	}
 	@Override
 	public String getIdItem() { return idMat; }
@@ -74,7 +84,7 @@ public class ObjectiveGather extends AbsObjective{
 			if(mat != null && sqp.qp.getPlayer() != null){
 				nb = 0;
 				for(ItemStack is : sqp.qp.getPlayer().getInventory().getContents()){
-					if(is != null && is.getType() == mat && (data == -1 || is.getData().getData() == data)){
+					if(is != null && is.getType() == mat){
 						if(displayName.isEmpty() || (is.hasItemMeta() && is.getItemMeta().hasDisplayName() && is.getItemMeta().getDisplayName().equalsIgnoreCase(displayName)))
 							nb += is.getAmount();
 					}
@@ -104,14 +114,18 @@ public class ObjectiveGather extends AbsObjective{
 		public void terminate() { super.terminate(); }
 		@Override
 		public void finish() {
-			Material m = Material.getMaterial(idMat);
+			Material m;
+			if(idMat.split(":").length > 1)
+				m = Material.getMaterial(idMat.split(":")[1].toUpperCase());
+			else
+				m = Material.getMaterial(idMat);
 			if(pickup && m != null && sqp.qp.getPlayer() != null){
 				nb = 0;
 				prenb = 0;
 				ItemStack[] contents = sqp.qp.getPlayer().getInventory().getContents();
 				for(int i = 0 ; i < contents.length ; i++){
 					ItemStack is = contents[i];
-					if(is != null && is.getType() == m && (data == -1 || is.getData().getData() == data)){
+					if(is != null && is.getType() == m){
 						if(displayName.isEmpty() || (is.hasItemMeta() && is.getItemMeta().hasDisplayName() && is.getItemMeta().getDisplayName().equalsIgnoreCase(displayName))){
 							nb += is.getAmount();
 							if(nb < amount){
