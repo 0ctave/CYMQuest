@@ -11,13 +11,13 @@ import fr.craftyourmind.quest.packet.DataQuestKeyboard;
 
 public class QuestKeyboard {
 
-	private static int defaultPlayerScreen = 49;
+	private static int defaultPlayerScreen = 78;
 	private static String defaultPlayerScreenKey = "N";
-	private static int defaultEventManager = 48;
+	private static int defaultEventManager = 66;
 	private static String defaultEventManagerKey = "B";
-	private static int defaultSkill = 51;
+	private static int defaultSkill = 77;
 	private static String defaultSkillKey = ",";
-	private static int defaultSkillBar = 46;
+	private static int defaultSkillBar = 67;
 	private static String defaultSkillBarKey = "C";
 
 	private static Map<Player, QuestKeyboard> keys = new HashMap<Player, QuestKeyboard>();
