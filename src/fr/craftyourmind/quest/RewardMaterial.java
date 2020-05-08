@@ -1,5 +1,6 @@
 package fr.craftyourmind.quest;
 
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -48,8 +49,11 @@ public class RewardMaterial extends AbsReward{
 		public StateMaterial(StateQuestPlayer sqp) { super(sqp); }
 		@Override
 		public void give() {
-			Material m = Material.getMaterial(idMat);
+			Material m = Material.matchMaterial(idMat);
+
+
 			if(m != null && sqp.qp.getPlayer() != null){
+
 				int nb = amount;
 				ItemStack[] contents = sqp.qp.getPlayer().getInventory().getContents();
 				for(int i = 0 ; i < contents.length ; i++){
@@ -69,13 +73,20 @@ public class RewardMaterial extends AbsReward{
 					for(int i = 0 ; i < contents.length ; i++){
 						if(contents[i] == null){ short plop = 0;
 							if(nb <= m.getMaxStackSize()){
-								contents[i] = new ItemStack(m, nb, plop, data);
+								//contents[i] = new ItemStack(m, nb, plop, data);
+								ItemStack is = new ItemStack(m, nb);
+								contents[i] = is;
+
 								ItemMeta im = contents[i].getItemMeta();
 								im.setDisplayName(displayName);
 								contents[i].setItemMeta(im);
 								break;
 							}else if(nb > m.getMaxStackSize()){
-								contents[i] = new ItemStack(m, m.getMaxStackSize(), plop, data);
+								//contents[i] = new ItemStack(m, m.getMaxStackSize(), plop, data);
+
+								ItemStack is = new ItemStack(m, m.getMaxStackSize());
+								contents[i] = is;
+
 								ItemMeta im = contents[i].getItemMeta();
 								im.setDisplayName(displayName);
 								contents[i].setItemMeta(im);

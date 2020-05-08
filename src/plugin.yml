@@ -3,6 +3,9 @@ main: fr.craftyourmind.quest.Plugin
 version: 1.0
 api-version: 1.15
 depend: [CYMManager]
+authors:
+  - Octave
+  - Thaksin
 commands:
   quest:
     aliases: cymquest
